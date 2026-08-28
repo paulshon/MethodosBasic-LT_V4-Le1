@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "NanumGothic";
+  src: url("/fonts/NanumGothic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumGothic";
+  src: url("/fonts/NanumGothicBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumGothic";
+  src: url("/fonts/NanumGothicExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumMyeongjo";
+  src: url("/fonts/NanumMyeongjo.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumMyeongjo";
+  src: url("/fonts/NanumMyeongjoBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumMyeongjo";
+  src: url("/fonts/NanumMyeongjoExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-gothic: "NanumGothic", "Malgun Gothic", sans-serif;
+  --font-myeongjo: "NanumMyeongjo", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink antialiased;
+  font-family: var(--font-gothic);
+}
+
+/* 사이트 CTA: 로고 청록 녹색 통일 */
+.btn-brand {
+  @apply inline-flex items-center justify-center rounded-full bg-brand font-semibold text-white transition-colors hover:bg-brand-dark;
+}
