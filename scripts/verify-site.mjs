@@ -20,15 +20,16 @@ async function httpStatus(url) {
   return res.status;
 }
 
+async function httpRedirectLocation(url) {
+  const res = await fetch(url, { redirect: "manual" });
+  return { status: res.status, location: res.headers.get("location") || "" };
+}
+
 console.log("→ npm run typecheck");
 run("npm", ["run", "typecheck"]);
 
 console.log("→ npm run build");
 run("npm", ["run", "build"]);
-
-const localReleases =
-  process.env.LOCAL_RELEASES_DIR ||
-  "C:/Users/saran/OneDrive/Desktop/통계 개발/methodos-basic-사이트 구축/MethodosBasic-LT-7-6개월";
 
 const child = spawn("npm", ["run", "start"], {
   cwd: site,
@@ -36,7 +37,7 @@ const child = spawn("npm", ["run", "start"], {
   stdio: "ignore",
   env: {
     ...process.env,
-    LOCAL_RELEASES_DIR: localReleases,
+    LOCAL_RELEASES_DIR: "",
   },
 });
 
@@ -52,9 +53,9 @@ try {
     if (!pass) failed = true;
   }
 
-  const dl = await httpStatus(`${base}/api/download/win-portable`);
-  const dlOk = dl === 200 || dl === 302;
-  console.log(dlOk ? "  ✓" : "  ✗", "/api/download/win-portable", dl);
+  const { status: dl, location: dlLoc } = await httpRedirectLocation(`${base}/api/download/win-portable`);
+  const dlOk = dl === 302 && dlLoc.includes("drive.google.com");
+  console.log(dlOk ? "  ✓" : "  ✗", "/api/download/win-portable", dl, dlLoc.slice(0, 60));
   if (!dlOk) failed = true;
 } catch (e) {
   console.error(e);
