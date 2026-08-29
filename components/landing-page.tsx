@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BarChart3, BookOpen, HardDrive, Sparkles } from "lucide-react";
-import { FEATURES, PRODUCT, STATS } from "@/lib/product";
+import { FEATURES, PRODUCT, STATS, productDisplayName } from "@/lib/product";
 import { DownloadCards } from "./download-cards";
 
 export function LandingPage() {
@@ -14,8 +14,8 @@ export function LandingPage() {
               Stats made clear.
             </h1>
             <p className="mt-4 max-w-xl text-lg text-ink-2">
-              <strong className="font-semibold text-ink">{PRODUCT.name}</strong> {PRODUCT.edition} — 연구용 통계분석
-              데스크톱. 클릭 기반 분석, 내장 예제·학습 가이드, 로컬 Python 엔진.
+              <strong className="font-semibold text-ink">{productDisplayName()}</strong> — 연구용 통계분석
+              데스크톱. 클릭 기반 분석, 내장 예제·학습 가이드, 로컬엔진.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -42,7 +42,9 @@ export function LandingPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-center text-xs text-ink-3">MethodosBasic-LT_V4-Le1 · {PRODUCT.version}</p>
+            <p className="mt-6 text-center text-xs text-ink-3">
+              {productDisplayName()} · {PRODUCT.version}
+            </p>
           </div>
         </div>
       </section>
@@ -56,7 +58,11 @@ export function LandingPage() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               { icon: Sparkles, title: "Point, click, analyze", text: "변수 선택과 옵션 설정만으로 표·그래프·해석을 확인합니다." },
-              { icon: BarChart3, title: "43 techniques", text: "기초 기술통계부터 회귀·요인·비모수까지 연구 현장에서 쓰는 기법을 담았습니다." },
+              {
+                icon: BarChart3,
+                title: "43 techniques",
+                text: "기초적인 기술통계, 빈도분석부터 연구현장에서 사용되는 분석기법들을 담았습니다.",
+              },
               { icon: BookOpen, title: "Learn as you go", text: "예제 데이터·학습 가이드·개념사전으로 결과 해석을 돕습니다." },
             ].map((card) => (
               <div key={card.title} className="rounded-2xl border border-line p-6">
@@ -72,12 +78,12 @@ export function LandingPage() {
       <section id="features" className="border-b border-line bg-wash py-16">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
           <h2 className="text-3xl font-bold text-ink">Features</h2>
-          <p className="mt-2 max-w-2xl text-ink-2">MethodosBasic-LT_V4-Le1 프로그램에 포함된 핵심 기능입니다.</p>
+          <p className="mt-2 max-w-2xl text-ink-2">{productDisplayName()} 프로그램에 포함된 핵심 기능입니다.</p>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {FEATURES.map((f) => (
-              <article key={f.title} className="rounded-xl border border-line bg-white p-5">
-                <h3 className="font-semibold text-ink">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">{f.body}</p>
+            {FEATURES.map((f, i) => (
+              <article key={f.title || `feature-${i}`} className="rounded-xl border border-line bg-white p-5">
+                {f.title ? <h3 className="font-semibold text-ink">{f.title}</h3> : null}
+                <p className={cnFeatureBody(f.title)}>{f.body}</p>
               </article>
             ))}
           </div>
@@ -93,8 +99,8 @@ export function LandingPage() {
             <h3 className="mt-3 text-lg font-semibold">Methodos Basic Desktop</h3>
             <ul className="mt-3 space-y-2 text-sm text-ink-2">
               <li>· 포터블 exe로 오프라인 실행</li>
-              <li>· 데이터는 PC에 유지 (exe 옆 Data 폴더)</li>
-              <li>· Python 엔진·예제·Chromium 런타임 동봉</li>
+              <li>· 데이터는 PC에 유지</li>
+              <li>· 통계엔진, 자체적으로 제작된 예제 탑재</li>
             </ul>
           </div>
         </div>
@@ -103,7 +109,7 @@ export function LandingPage() {
       <section id="download-preview" className="bg-wash py-16">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
           <h2 className="text-3xl font-bold text-ink">Ready to download?</h2>
-          <p className="mt-2 text-ink-2">Windows 포터블과 macOS ZIP을 선택하세요.</p>
+          <p className="mt-2 text-ink-2">Windows 포터블과 macOS dmg(Intel·Apple Silicon)을 선택하세요.</p>
           <div className="mt-8">
             <DownloadCards compact />
           </div>
@@ -111,4 +117,8 @@ export function LandingPage() {
       </section>
     </main>
   );
+}
+
+function cnFeatureBody(title: string) {
+  return title ? "mt-2 text-sm leading-relaxed text-ink-2" : "text-sm leading-relaxed text-ink-2";
 }

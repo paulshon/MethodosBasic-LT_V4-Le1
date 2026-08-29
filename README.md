@@ -2,7 +2,7 @@
 
 Research statistical analysis — **Methodos Basic** 공식 다운로드·소개 사이트 (Next.js).
 
-Clerk · Vercel · Supabase. 데스크톱 배포: **MethodosBasic-LT_V4-Le1** (Windows 포터블 · macOS ZIP).
+Clerk · Vercel · Supabase. 데스크톱 배포: **Methodos Basic LT** (Windows 포터블 · macOS dmg x64/arm64).
 
 ## 로컬 실행
 
@@ -26,10 +26,11 @@ npm run verify
 2. Environment Variables: `.env.example` 참고
 3. macOS ZIP 등은 Supabase Storage `releases` 버킷 또는 `NEXT_PUBLIC_DOWNLOAD_*_URL` 설정
 
-## Windows 다운로드
+## Windows / macOS 다운로드
 
-기본값: Google Drive (`/api/download/win-portable` → 302 리다이렉트).  
-Vercel에서 `NEXT_PUBLIC_DOWNLOAD_WIN_PORTABLE_URL` 로 다른 URL 지정 가능.
+기본값: Google Drive (`/api/download/*` → 302).  
+Windows: `win-portable` · Mac: `mac-x64-dmg`, `mac-arm64-dmg`.  
+Vercel에서 `NEXT_PUBLIC_DOWNLOAD_*_URL` 로 다른 URL 지정 가능.
 
 ## 주의
 

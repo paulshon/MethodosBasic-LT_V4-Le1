@@ -57,6 +57,13 @@ try {
   const dlOk = dl === 302 && dlLoc.includes("drive.google.com");
   console.log(dlOk ? "  ✓" : "  ✗", "/api/download/win-portable", dl, dlLoc.slice(0, 60));
   if (!dlOk) failed = true;
+
+  for (const id of ["mac-x64-dmg", "mac-arm64-dmg"]) {
+    const { status, location } = await httpRedirectLocation(`${base}/api/download/${id}`);
+    const ok = status === 302 && location.includes("drive.google.com");
+    console.log(ok ? "  ✓" : "  ✗", `/api/download/${id}`, status, location.slice(0, 60));
+    if (!ok) failed = true;
+  }
 } catch (e) {
   console.error(e);
   failed = true;

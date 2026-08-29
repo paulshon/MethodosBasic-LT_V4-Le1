@@ -41,9 +41,6 @@ export function SiteNav() {
         </nav>
 
         <div className="ml-auto hidden items-center gap-3 md:flex">
-          <Link href="/login" className="text-[13px] text-ink-2 hover:text-brand">
-            Sign in
-          </Link>
           <Link
             href="/download"
             className="rounded-full bg-brand px-4 py-2 text-[13px] font-semibold text-white shadow-sm hover:bg-brand-dark"
@@ -75,9 +72,6 @@ export function SiteNav() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/login" className="px-2 py-2 text-sm text-ink-2" onClick={() => setOpen(false)}>
-              Sign in
-            </Link>
             <Link
               href="/download"
               className="mt-1 rounded-full bg-brand px-4 py-2 text-center text-sm font-semibold text-white"

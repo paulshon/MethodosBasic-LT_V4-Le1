@@ -17,7 +17,7 @@ export function SiteFooter() {
             About Methodos
           </Link>
         </nav>
-        <p className="text-xs text-ink-3">© {new Date().getFullYear()} Methodos Lab · Methodos Basic LT V4-Le1</p>
+        <p className="text-xs text-ink-3">© {new Date().getFullYear()} Methodos Lab</p>
       </div>
     </footer>
   );

@@ -1,14 +1,14 @@
 import { resolveDownloadUrl } from "@/lib/download-url";
 
 export const PRODUCT = {
-  slug: "methodos-basic-lt-v4-le1",
+  slug: "methodos-basic-lt",
   name: "Methodos Basic",
-  edition: "LT V4-Le1",
+  edition: "LT",
   tagline: "연구용 통계분석 데스크톱",
   version: "21.0.0-LT.V4-Le1",
 } as const;
 
-export type ArtifactId = "win-portable" | "mac-zip";
+export type ArtifactId = "win-portable" | "mac-x64-dmg" | "mac-arm64-dmg";
 
 export type ReleaseArtifact = {
   id: ArtifactId;
@@ -20,26 +20,39 @@ export type ReleaseArtifact = {
   envKey: string;
 };
 
-export const ARTIFACTS: ReleaseArtifact[] = [
+export const WIN_ARTIFACT: ReleaseArtifact = {
+  id: "win-portable",
+  label: "Windows 포터블",
+  platform: "Windows",
+  description: "설치 없이 exe 하나로 실행. USB·오프라인 환경에 적합합니다.",
+  fileName: "MethodosBasic-LT_V4-Le1.exe",
+  sizeHint: "~172 MB",
+  envKey: "NEXT_PUBLIC_DOWNLOAD_WIN_PORTABLE_URL",
+};
+
+export const MAC_DMG_ARTIFACTS: ReleaseArtifact[] = [
   {
-    id: "win-portable",
-    label: "Windows 포터블",
-    platform: "Windows",
-    description: "설치 없이 exe 하나로 실행. USB·오프라인 환경에 적합합니다.",
-    fileName: "MethodosBasic-LT_V4-Le1.exe",
-    sizeHint: "~172 MB",
-    envKey: "NEXT_PUBLIC_DOWNLOAD_WIN_PORTABLE_URL",
+    id: "mac-x64-dmg",
+    label: "Intel (x64)",
+    platform: "macOS",
+    description: "Intel Mac용 dmg 설치 파일입니다.",
+    fileName: "MethodosBasic-LT_V1-Le1-6M-mac-x64.dmg",
+    sizeHint: "dmg",
+    envKey: "NEXT_PUBLIC_DOWNLOAD_MAC_X64_DMG_URL",
   },
   {
-    id: "mac-zip",
-    label: "macOS ZIP",
+    id: "mac-arm64-dmg",
+    label: "Apple Silicon (arm64)",
     platform: "macOS",
-    description: "압축 해제 후 실행합니다.",
-    fileName: "MethodosBasic-LT_V4-Le1-mac.zip",
-    sizeHint: "빌드 후 업로드",
-    envKey: "NEXT_PUBLIC_DOWNLOAD_MAC_ZIP_URL",
+    description: "Apple Silicon Mac용 dmg 설치 파일입니다.",
+    fileName: "MethodosBasic-LT_V1-Le1-6M-mac-arm64.dmg",
+    sizeHint: "dmg",
+    envKey: "NEXT_PUBLIC_DOWNLOAD_MAC_ARM64_DMG_URL",
   },
 ];
+
+/** @deprecated use WIN_ARTIFACT + MAC_DMG_ARTIFACTS */
+export const ARTIFACTS: ReleaseArtifact[] = [WIN_ARTIFACT, ...MAC_DMG_ARTIFACTS];
 
 export const STATS = [
   { value: "43", label: "통계 기법" },
@@ -51,11 +64,11 @@ export const STATS = [
 export const FEATURES = [
   {
     title: "클릭 한 번으로 분석",
-    body: "변수를 고르고 옵션을 설정하면 표·그래프·해석이 한 화면에 갱신됩니다. SPSS 스타일 워크플로에 익숙한 연구자를 위한 데스크톱 UI입니다.",
+    body: "변수를 고르고 옵션을 설정하면 표·그래프·해석이 한 화면에 갱신됩니다. 기존 통계프로그램 스타일 워크플로에 익숙한 연구자를 위한 데스크톱 UI입니다.",
   },
   {
-    title: "Python 통계 엔진",
-    body: "화면은 Electron·React, 계산은 동봉된 Python 엔진(MethodosEngine)이 수행합니다. 인터넷 없이 로컬에서 전부 동작합니다.",
+    title: "",
+    body: "통계계산은 탑재된 통계엔진이 수행하고, 온라인연결없이 로컬에서 전부동작하게 설계되었습니다.",
   },
   {
     title: "예제·학습 자료 내장",
@@ -75,4 +88,8 @@ export const WINDOWS_NOTES = [
 
 export function artifactPublicUrl(id: ArtifactId): string | null {
   return resolveDownloadUrl(id);
+}
+
+export function productDisplayName(): string {
+  return `${PRODUCT.name} ${PRODUCT.edition}`.trim();
 }

@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Methodos Basic — 연구용 통계분석 데스크톱",
   description:
-    "MethodosBasic-LT_V4-Le1. Windows·macOS 다운로드, 43종 통계 기법, 오프라인 Python 엔진.",
+    "Methodos Basic LT. Windows·macOS 다운로드, 43종 통계 기법, 오프라인 로컬 엔진.",
 };
 
 export const viewport: Viewport = {
