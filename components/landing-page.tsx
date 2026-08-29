@@ -80,10 +80,10 @@ export function LandingPage() {
           <h2 className="text-3xl font-bold text-ink">Features</h2>
           <p className="mt-2 max-w-2xl text-ink-2">{productDisplayName()} 프로그램에 포함된 핵심 기능입니다.</p>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {FEATURES.map((f, i) => (
-              <article key={f.title || `feature-${i}`} className="rounded-xl border border-line bg-white p-5">
-                {f.title ? <h3 className="font-semibold text-ink">{f.title}</h3> : null}
-                <p className={cnFeatureBody(f.title)}>{f.body}</p>
+            {FEATURES.map((f) => (
+              <article key={f.title} className="rounded-xl border border-line bg-white p-5">
+                <h3 className="font-semibold text-ink">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-2">{f.body}</p>
               </article>
             ))}
           </div>
@@ -108,17 +108,17 @@ export function LandingPage() {
 
       <section id="download-preview" className="bg-wash py-16">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
-          <h2 className="text-3xl font-bold text-ink">Ready to download?</h2>
-          <p className="mt-2 text-ink-2">Windows 포터블과 macOS dmg(Intel·Apple Silicon)을 선택하세요.</p>
-          <div className="mt-8">
-            <DownloadCards compact />
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-ink">Ready to download?</h2>
+            <p className="mx-auto mt-2 max-w-xl text-ink-2">
+              Windows 포터블과 macOS dmg(Intel·Apple Silicon)을 선택하세요.
+            </p>
+          </div>
+          <div className="mt-10">
+            <DownloadCards />
           </div>
         </div>
       </section>
     </main>
   );
-}
-
-function cnFeatureBody(title: string) {
-  return title ? "mt-2 text-sm leading-relaxed text-ink-2" : "text-sm leading-relaxed text-ink-2";
 }
